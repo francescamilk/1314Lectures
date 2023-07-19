@@ -12,16 +12,6 @@ class Shoe
     # attr_writer :size, :color
     attr_accessor :size, :color
 
-    def unbox!
-        refund_customer
-
-        @unboxed = true
-    end
-
-    def unboxed?
-        return @unboxed
-    end
-
     # def color
     #     return @color
     # end
@@ -38,7 +28,16 @@ class Shoe
     #     @size = new_size
     # end
 
-    private 
+    def unbox!
+        refund_customer()
+        @unboxed = true
+    end
+
+    def unboxed?
+        return @unboxed
+    end
+
+    private
 
     def refund_customer
         "I am refunding..."
@@ -46,14 +45,13 @@ class Shoe
 end
 
 ### TEST AREA ###
-my_shoe = Shoe.new(36, "wite")
-p my_shoe.refund_customer
+# casting *instances* of Shoe
+my_shoe   = Shoe.new(36, "white")
+your_shoe = Shoe.new(42, "black")
 
-# my_shoe.unbox!
+# using *reader* methods to expose data
+puts "This is a #{my_shoe.color} #{my_shoe.size}"
+puts "This is a #{your_shoe.color} #{your_shoe.size}"
 
-# your_shoe = Shoe.new(42, "black")
-
-# p "This is a #{my_shoe.color} #{my_shoe.size} shoe - #{my_shoe.unboxed?}"
-# p "This is a #{your_shoe.color} #{your_shoe.size} shoe - #{your_shoe.unboxed?}"
-
-# p your_shoe
+# using *writer* methods to update data
+my_shoe.unbox!
